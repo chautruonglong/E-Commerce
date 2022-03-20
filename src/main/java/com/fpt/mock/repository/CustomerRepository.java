@@ -1,9 +1,9 @@
 package com.fpt.mock.repository;
 
-import com.fpt.mock.entity.Product;
+import com.fpt.mock.entity.Customer;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductRepository extends JpaRepository<Product, UUID> {
+public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
 }
