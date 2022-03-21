@@ -1,4 +1,4 @@
-create EXTENSION IF NOT EXISTS "uuid-ossp";
+create extension if not exists "uuid-ossp";
 
 create table customers (
    id uuid default uuid_generate_v4() not null,
