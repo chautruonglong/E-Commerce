@@ -1,5 +1,6 @@
-import requests as req
 import json
+import requests as req
+
 
 class Product:
     def __init__(self):
@@ -17,6 +18,7 @@ class Product:
             "category": self.category,
             "price": self.price,
             "discount": self.discount,
+            "description": self.description,
             "thumbnailImage": self.thumbnailImage,
             "otherImages": self.otherImages,
         })
@@ -27,6 +29,7 @@ class Product:
             "category": self.category,
             "price": self.price,
             "discount": self.discount,
+            "description": self.description,
             "thumbnailImage": self.thumbnailImage,
             "otherImages": self.otherImages,
         }
