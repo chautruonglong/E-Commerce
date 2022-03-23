@@ -1,6 +1,9 @@
 package com.fpt.mock.entity;
 
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
+import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.Locale;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -33,7 +36,7 @@ public class Product extends BaseEntity {
     @Column(name = "name", columnDefinition = "text")
     private String name;
 
-    @Column(name = "code", columnDefinition = "text")
+    @Column(name = "category", columnDefinition = "text")
     private String category;
 
     @Column(name = "price", columnDefinition = "double precision")
@@ -51,5 +54,25 @@ public class Product extends BaseEntity {
     @Type(type = "string-array")
     @Column(name = "otherImages", columnDefinition = "text[]")
     private String[] otherImages;
+
+    public String getThumbnailImage() {
+        return "/products/" + thumbnailImage;
+    }
+
+    public String[] getOtherImages() {
+        return Arrays.stream(otherImages).map(image -> "/products/" + image).toArray(String[]::new);
+    }
+
+    public String getPrice() {
+        Locale locale = new Locale("nv", "VN");
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        return numberFormat.format(price);
+    }
+
+    public String getDiscount() {
+        Locale locale = new Locale("nv", "VN");
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        return numberFormat.format(discount);
+    }
     
 }

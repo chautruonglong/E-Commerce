@@ -20,9 +20,6 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "customers")
 public class Customer extends BaseEntity {
 
-    @Column(name = "code", columnDefinition = "text")
-    private String code;
-
     @Column(name = "email", columnDefinition = "text")
     private String email;
 
