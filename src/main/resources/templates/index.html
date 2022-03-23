@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title>FPT Mock E-Commerce</title>
 
+    <link th:href="@{/images/favicon.svg}" rel="icon" type="image/x-icon">
+
     <script th:src="@{https://cdn.tailwindcss.com}"></script>
     <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
     <script th:src="@{https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js}" type="module" ></script>
     <script th:src="@{https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js}" nomodule></script>
 
-    <link th:href="@{/images/favicon.svg}" rel="icon" type="image/x-icon">
-    <link th:href="@{/css/index.css}" rel="stylesheet">
-    <link th:href="@{/css/header.css}" rel="stylesheet">
-
+    <script th:src="@{/js/state.js}"></script>
+    <script th:src="@{/js/fetcher.js}"></script>
     <script th:src="@{/js/index.js}"></script>
     <script th:src="@{/js/header.js}"></script>
   </head>
@@ -42,5 +42,6 @@
         </div>
       </div>
     </div>
+
   </body>
 </html>

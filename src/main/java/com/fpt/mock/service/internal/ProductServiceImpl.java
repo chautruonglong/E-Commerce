@@ -30,4 +30,11 @@ class ProductServiceImpl implements ProductService {
         return productRepository.findIndexProducts(pageable);
     }
 
+    @Override
+    public List<IndexProductDto> getIndexProductsByName(int limit, int page, String key) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+        Pageable pageable = PageRequest.of(page, limit, sort);
+        return productRepository.findIndexProductsByName(key, pageable);
+    }
+
 }

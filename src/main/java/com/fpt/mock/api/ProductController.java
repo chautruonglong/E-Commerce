@@ -34,4 +34,16 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/api/v1/products/q")
+    public List<IndexProductDto> getProductsByName(@RequestParam int limit,
+                                                   @RequestParam int page,
+                                                   @RequestParam String category) {
+        try {
+            return productService.getIndexProductsByName(limit, page, category);
+        }
+        catch(Exception exception) {
+            throw new GlobalRequestException(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

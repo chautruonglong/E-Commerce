@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Query("""
         select new com.fpt.mock.dto.IndexProductDto(p.name, p.price, p.discount, p.thumbnailImage)
-        from Product p where p.category like :category
+        from Product p where lower(p.category) like lower(concat('%', :category, '%'))
     """)
     List<IndexProductDto> findIndexProducts(String category, Pageable pageable);
 
@@ -22,4 +22,9 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     """)
     List<IndexProductDto> findIndexProducts(Pageable pageable);
 
+    @Query("""
+        select new com.fpt.mock.dto.IndexProductDto(p.name, p.price, p.discount, p.thumbnailImage)
+        from Product p where lower(p.name) like lower(concat('%', :key, '%'))
+    """)
+    List<IndexProductDto> findIndexProductsByName(String key, Pageable pageable);
 }
