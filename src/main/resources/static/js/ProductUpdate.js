@@ -1,13 +1,9 @@
 $(document).ready(() => {
-    $("#addProductButton").click(function() {
-        $("#productCreation").show();
+    $("#productUpdateCloseButton").click(() => {
+        $("#productUpdate").hide();
     });
 
-    $("#productCreationCloseButton").click(() => {
-        $("#productCreation").hide();
-    });
-
-    $("#productFormCreation").validate({
+    $("#productFormUpdate").validate({
         onfocusout: false,
         onkeyup: false,
         onclick: false,
@@ -33,24 +29,24 @@ $(document).ready(() => {
                 number: true,
                 min: 0,
                 max: 100
-            },
-            thumbnailImage: {
-                required: true
             }
         }
     });
 
-    $("#postProductButton").click(function() {
-        if($("#productFormCreation").valid()) {
+    $("#updateProductButton").click(function() {
+        if($("#productFormUpdate").valid()) {
             const formData = new FormData();
 
-            $("#productFormCreation").serializeArray().forEach(item => {
+            $("#productFormUpdate").serializeArray().forEach(item => {
                 formData.append(item.name, item.value);
             });
 
-            formData.append("thumbnailImage", $("#productFormCreation input[name=thumbnailImage][type=file]")[0].files[0]);
+            const file = $("#productFormUpdate input[name=thumbnailImage][type=file]")[0].files[0];
+            if(file) {
+                formData.append("thumbnailImage", file);
+            }
 
-            postProduct(formData);
+            updateProduct($("#productUpdate").attr("value"), formData);
         }
     });
 });

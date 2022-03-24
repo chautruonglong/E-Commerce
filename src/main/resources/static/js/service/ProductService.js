@@ -84,6 +84,18 @@ const fetchDetailProduct = (id) => {
                 deleteProduct(data.id);
             });
 
+            $("#updateProduct").click(() => {
+                $("#productDetail").remove();
+                $("#productUpdate").show();
+
+                $("#productUpdate").attr("value", data.id);
+                $("#productFormUpdate input[name=name]").attr("value", data.name);
+                $("#productFormUpdate input[name=category]").attr("value", data.category);
+                $("#productFormUpdate input[name=price]").attr("value", Number(data.price.replace(/[^0-9.-]+/g, "")));
+                $("#productFormUpdate input[name=discount]").attr("value", Number(data.discount.replace(/[^0-9.-]+/g, "")));
+                $("#productFormUpdate textarea[name=description]").val(data.description);
+            });
+
             $("#orderProduct").click(() => {
                 console.log("order");
             });
@@ -117,6 +129,34 @@ const postProduct = (data) => {
             $("#productCreation").hide();
 
             $("#productForm").each(function() {
+                this.reset();
+            });
+
+            $(document).ready(() => {
+                const productCards = $("div[name=productCard]");
+                productCards.unbind("click");
+                productCards.click(function() {
+                    const id = $(this).attr("value");
+                    fetchDetailProduct(id);
+                });
+            });
+        }
+    });
+}
+
+const updateProduct = (id, data) => {
+    $.ajax({
+        type: "PUT",
+        processData: false,
+        contentType: false,
+        url: `/api/v1/products/${id}`,
+        data,
+        success: data => {
+            $(`#listProducts div[value=${id}]`).html($.tmpl("productCardTemplate", { product: data }).html());
+
+            $("#productUpdate").hide();
+
+            $("#productFormUpdate").each(function() {
                 this.reset();
             });
 

@@ -2,6 +2,7 @@ package com.fpt.mock.api;
 
 import com.fpt.mock.dto.IndexProductDto;
 import com.fpt.mock.dto.ProductCreationDto;
+import com.fpt.mock.dto.ProductUpdateDto;
 import com.fpt.mock.entity.Product;
 import com.fpt.mock.exception.GlobalRequestException;
 import com.fpt.mock.service.ProductService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -90,4 +92,15 @@ public class ProductController {
             throw new GlobalRequestException(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping(value = "/api/v1/products/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Product> updateProduct(@PathVariable String id, @Valid @ModelAttribute ProductUpdateDto productCreationDto) {
+        try {
+            return ResponseEntity.ok(productService.updateProduct(id, productCreationDto));
+        }
+        catch(Exception exception) {
+            throw new GlobalRequestException(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

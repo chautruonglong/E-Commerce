@@ -2,6 +2,7 @@ package com.fpt.mock.service.internal;
 
 import com.fpt.mock.dto.IndexProductDto;
 import com.fpt.mock.dto.ProductCreationDto;
+import com.fpt.mock.dto.ProductUpdateDto;
 import com.fpt.mock.entity.Product;
 import com.fpt.mock.repository.ProductRepository;
 import com.fpt.mock.service.ProductService;
@@ -67,6 +68,25 @@ class ProductServiceImpl implements ProductService {
             .thumbnailImage(fileName)
             .otherImages(new String[0])
             .build();
+
+        return productRepository.save(product);
+    }
+
+    @Override
+    public Product updateProduct(String id, ProductUpdateDto productUpdateDto) throws IOException {
+        Product product = productRepository.findById(UUID.fromString(id))
+            .orElseThrow(() -> new RuntimeException("Product not in database"));
+
+        product.setName(productUpdateDto.getName());
+        product.setCategory(productUpdateDto.getCategory());
+        product.setPrice(productUpdateDto.getPrice());
+        product.setDiscount(productUpdateDto.getDiscount());
+        product.setDescription(productUpdateDto.getDescription());
+
+        if(productUpdateDto.getThumbnailImage() != null) {
+            String fileName = fileUtil.writeToDiskFromBuffer(productUpdateDto.getThumbnailImage());
+            product.setThumbnailImage(fileName);
+        }
 
         return productRepository.save(product);
     }

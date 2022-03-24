@@ -20,19 +20,21 @@
               <p class="text-2xl text-gray-900">${product.price} VNĐ</p>
               <span class="mt-1 pl-1 text-sm text-gray-500 border-solid border-2 border-indigo-100 bg-slate-200">-${product.discount}%</span>
             </div>
-            <p class="text-sm text-gray-500 sm:pr-12">${product.description}</p>
-            <section aria-labelledby="options-heading">
-              <div class="flex items-align mt-5">
-                <button id="deleteProduct" class="w-full mr-5 bg-red-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                  <ion-icon name="trash-outline" class="text-xl"></ion-icon>
-                  <span class="ml-5">Delete</span>
-                </button>
-                <button id="orderProduct" class="w-full ml-5 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  <ion-icon name="cart-outline" class="text-xl"></ion-icon>
-                  <span class="ml-5">Order</span>
-                </button>
-              </div>
-            </section>
+            <p class="w-full text-sm text-gray-500">${product.description}</p>
+            <div class="flex items-align justify-between mt-5 w-full">
+              <button id="deleteProduct" class="bg-red-600 border border-transparent rounded-md py-3 px-5 flex items-center justify-center text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                <ion-icon name="trash-outline" class="text-xl"></ion-icon>
+                <span class="ml-5">Delete</span>
+              </button>
+              <button id="updateProduct" class="bg-indigo-600 border border-transparent rounded-md py-3 px-5 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <ion-icon name="create-outline" class="text-xl"></ion-icon>
+                <span class="ml-5">Edit</span>
+              </button>
+              <button id="orderProduct" class="bg-indigo-600 border border-transparent rounded-md py-3 px-5 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <ion-icon name="cart-outline" class="text-xl"></ion-icon>
+                <span class="ml-5">Order</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
