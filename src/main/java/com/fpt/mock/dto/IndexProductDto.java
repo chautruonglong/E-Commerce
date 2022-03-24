@@ -3,6 +3,7 @@ package com.fpt.mock.dto;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class IndexProductDto {
 
+    private UUID id;
     private String name;
     private double price;
     private double discount;

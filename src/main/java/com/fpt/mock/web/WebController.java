@@ -22,7 +22,7 @@ public class WebController {
                         @RequestParam(defaultValue = "0") int page,
                         @Nullable @RequestParam String category) {
         try {
-            List<IndexProductDto> products = null;
+            List<IndexProductDto> products;
 
             if(category == null || category.equals("")) {
                 products = productService.getIndexProducts(limit, page);
@@ -32,11 +32,11 @@ public class WebController {
             }
 
             model.addAttribute("products", products);
-            return "index";
+            return "Index";
         }
         catch(Exception exception) {
             model.addAttribute("exception", exception);
-            return "notFound";
+            return "NotFound";
         }
     }
 

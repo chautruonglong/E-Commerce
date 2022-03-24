@@ -15,7 +15,9 @@ public class WebMVCConfig implements WebMvcConfigurer {
         "classpath:/META-INF/resources/",
         "classpath:/resources/",
         "classpath:/static/",
-        "classpath:/public/"};
+        "classpath:/public/",
+        "classpath:/templates/public/"
+    };
 
     @Value("${fpt.mock.externalResources}")
     private String externalResources;

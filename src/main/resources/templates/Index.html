@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>FPT Mock E-Commerce</title>
+
+    <link th:href="@{/images/favicon.svg}" rel="icon" type="image/x-icon">
+
+    <script th:src="@{https://cdn.tailwindcss.com}"></script>
+    <script th:src="@{https://code.jquery.com/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/lib/jquery.tmpl.min.js}"></script>
+    <script th:src="@{https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js}" type="module" ></script>
+    <script th:src="@{https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js}" nomodule></script>
+
+    <script th:src="@{/js/State.js}"></script>
+    <script th:src="@{/js/service/ProductService.js}"></script>
+    <script th:src="@{/js/Index.js}"></script>
+    <script th:src="@{/js/Header.js}"></script>
+    <script th:src="@{/js/ProductCard.js}"></script>
+  </head>
+  <body>
+    <div th:replace="~{/components/Header :: header__copy}"></div>
+
+    <div class="bg-white">
+      <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">Customers also purchased</h2>
+        <div id="listProducts" class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <th:block th:each="product: ${products}">
+            <div th:replace="~{/components/ProductCard :: productCard__copy(${product})}"></div>
+          </th:block>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

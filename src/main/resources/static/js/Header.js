@@ -83,5 +83,24 @@ $(document).ready(() => {
 
             searchProducts(true);
         }
-    })
+    });
+
+    $('html').click(function() {
+        $("#userPopupMenu").hide();
+    });
+
+    $('#userIcon').click((e) => {
+        event.stopPropagation();
+        $("#userPopupMenu").show();
+    });
+
+    $("#buggerMenu").click(() => {
+       const mobileMenu = $("#mobileMenu");
+       if(mobileMenu.is(":visible")) {
+           mobileMenu.slideUp("fast");
+       }
+       else {
+           mobileMenu.slideToggle("fast");
+       }
+    });
 });

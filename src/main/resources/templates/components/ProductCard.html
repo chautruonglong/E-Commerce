@@ -1,0 +1,14 @@
+<div th:fragment="productCard__copy(product)" name="productCard" th:value="${product.id}" class="group relative hover:cursor-pointer">
+  <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+    <img th:src="${product.thumbnailImage}" th:alt="${product.name}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+  </div>
+  <div class="mt-4 flex flex-col justify-between">
+    <p th:text="${product.price} + ' VNĐ'" class="text-base font-extrabold text-gray-900"></p>
+    <div>
+      <span th:text="'-' + ${product.discount} + '%'" class="mt-1 pl-1 text-sm text-gray-500 border-solid border-2 border-indigo-100 bg-slate-200"></span>
+    </div>
+    <h3 class="text-sm text-gray-700">
+      <p th:text="${product.name}"></p>
+    </h3>
+  </div>
+</div>
