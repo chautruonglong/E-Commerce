@@ -5,7 +5,6 @@ create table customers (
     createdAt timestamp default now(),
     updatedAt timestamp default now(),
     address text,
-    code text,
     email text,
     password text,
     phone text,
@@ -25,18 +24,12 @@ create table products (
    id uuid default uuid_generate_v4() not null,
     createdAt timestamp default now(),
     updatedAt timestamp default now(),
-    code text,
+    category text,
+    description text,
+    discount double precision,
     name text,
-    price double,
+    otherImages text[],
+    price double precision,
+    thumbnailImage text,
     primary key (id)
 );
-
-create table products_images (
-   products_id uuid default uuid_generate_v4() not null,
-    images text[]
-);
-
-alter table products_images
-   add constraint FKbp8jstfr20o4dtau7wgu5khju
-   foreign key (products_id)
-   references products;

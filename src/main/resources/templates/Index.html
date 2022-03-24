@@ -11,12 +11,14 @@
     <script th:src="@{/js/lib/jquery.tmpl.min.js}"></script>
     <script th:src="@{https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js}" type="module" ></script>
     <script th:src="@{https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js}" nomodule></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js}"></script>
 
     <script th:src="@{/js/State.js}"></script>
     <script th:src="@{/js/service/ProductService.js}"></script>
     <script th:src="@{/js/Index.js}"></script>
     <script th:src="@{/js/Header.js}"></script>
     <script th:src="@{/js/ProductCard.js}"></script>
+    <script th:src="@{/js/ProductCreation.js}"></script>
   </head>
   <body>
     <div th:replace="~{/components/Header :: header__copy}"></div>
@@ -32,5 +34,10 @@
       </div>
     </div>
 
+    <button id="addProductButton" class="fixed w-16 h-16 bottom-12 right-12 bg-indigo-600 rounded-full z-50 drop-shadow-2xl hover:scale-110 ease-in-out duration-300">
+      <ion-icon name="create-outline" class="text-3xl text-white"></ion-icon>
+    </button>
+
+    <div th:replace="~{/components/ProductCreation :: productCreation__copy}"></div>
   </body>
 </html>

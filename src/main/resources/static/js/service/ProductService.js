@@ -23,13 +23,7 @@ const fetchMoreProducts = (reset=false) => {
             }
 
             $.each(data, (key, item) => {
-                $.tmpl("productCardTemplate", {
-                    product: item,
-                    handleClick: function() {
-                        const id = $(this).attr("value");
-                        fetchDetailProduct(id);
-                    }
-                }).appendTo("#listProducts");
+                $.tmpl("productCardTemplate", { product: item }).appendTo("#listProducts");
             });
             $(document).ready(() => {
                 const productCards = $("div[name=productCard]");
@@ -82,8 +76,57 @@ const fetchDetailProduct = (id) => {
         success: data => {
             $.tmpl("productDetailTemplate", { product: data }).appendTo("body");
 
-            $("#closedModalButton").click(() => {
-                $("#productModal").remove();
+            $("#productDetailCloseButton").click(() => {
+                $("#productDetail").remove();
+            });
+
+            $("#deleteProduct").click(() => {
+                deleteProduct(data.id);
+            });
+
+            $("#orderProduct").click(() => {
+                console.log("order");
+            });
+        }
+    });
+}
+
+const deleteProduct = (id) => {
+    $.ajax({
+        type: "DELETE",
+        dataType: "json",
+        contentType: 'json',
+        url: `/api/v1/products/${id}`,
+        success: data => {
+            $(`div[name=productCard][value=${id}]`).remove();
+            $("#productDetail").remove();
+        }
+    });
+}
+
+const postProduct = (data) => {
+    $.ajax({
+        type: "POST",
+        processData: false,
+        contentType: false,
+        url: `/api/v1/products`,
+        data,
+        success: data => {
+            $.tmpl("productCardTemplate", { product: data }).prependTo("#listProducts");
+
+            $("#productCreation").hide();
+
+            $("#productForm").each(function() {
+                this.reset();
+            });
+
+            $(document).ready(() => {
+                const productCards = $("div[name=productCard]");
+                productCards.unbind("click");
+                productCards.click(function() {
+                    const id = $(this).attr("value");
+                    fetchDetailProduct(id);
+                });
             });
         }
     });

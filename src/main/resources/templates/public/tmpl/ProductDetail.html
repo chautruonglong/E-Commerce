@@ -1,7 +1,6 @@
-<div id="productModal" class="fixed z-10 inset-0 overflow-y-auto" role="dialog" aria-modal="true">
+<div id="productDetail" class="fixed z-10 inset-0 overflow-y-auto h-full" role="dialog" aria-modal="true">
   <div class="flex min-h-screen text-center md:block md:px-2 lg:px-4" style="font-size: 0">
     <div class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" aria-hidden="true"></div>
-
     <span class="hidden md:inline-block md:align-middle md:h-screen" aria-hidden="true">&#8203;</span>
 
     <div class="flex text-base text-left transform transition w-full md:inline-block md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl">
@@ -11,22 +10,28 @@
             <img src=${product.thumbnailImage} alt=${product.name} class="object-center object-cover">
           </div>
           <div class="sm:col-span-8 lg:col-span-7 flex flex-col justify-between h-full">
-            <button id="closedModalButton" type="button" class="flex justify-end text-gray-400 hover:text-gray-500">
+            <button id="productDetailCloseButton" type="button" class="flex justify-end text-gray-400 hover:text-gray-500">
               <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             <h2 class="text-2xl font-extrabold text-gray-900">${product.name}</h2>
-            <div>
+            <div class="my-7">
               <p class="text-2xl text-gray-900">${product.price} VNĐ</p>
               <span class="mt-1 pl-1 text-sm text-gray-500 border-solid border-2 border-indigo-100 bg-slate-200">-${product.discount}%</span>
             </div>
             <p class="text-sm text-gray-500 sm:pr-12">${product.description}</p>
             <section aria-labelledby="options-heading">
-              <form>
-
-                <button type="submit" class="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add to bag</button>
-              </form>
+              <div class="flex items-align mt-5">
+                <button id="deleteProduct" class="w-full mr-5 bg-red-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                  <ion-icon name="trash-outline" class="text-xl"></ion-icon>
+                  <span class="ml-5">Delete</span>
+                </button>
+                <button id="orderProduct" class="w-full ml-5 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <ion-icon name="cart-outline" class="text-xl"></ion-icon>
+                  <span class="ml-5">Order</span>
+                </button>
+              </div>
             </section>
           </div>
         </div>

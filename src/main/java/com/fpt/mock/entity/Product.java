@@ -60,7 +60,12 @@ public class Product extends BaseEntity {
     }
 
     public String[] getOtherImages() {
-        return Arrays.stream(otherImages).map(image -> "/products/" + image).toArray(String[]::new);
+        if(otherImages == null) {
+            return null;
+        }
+        return Arrays.stream(otherImages)
+            .map(image -> "/products/" + image)
+            .toArray(String[]::new);
     }
 
     public String getPrice() {

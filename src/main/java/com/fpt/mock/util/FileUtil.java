@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileUtil {
@@ -30,7 +31,7 @@ public class FileUtil {
         return UUID.randomUUID() + "." + fileExtension;
     }
 
-    public String writeToDisk(String imageUrl) throws IOException {
+    public String writeToDiskFromInternet(String imageUrl) throws IOException {
         URL url = new URL(imageUrl);
 
         String fileExtension = getFileExtension(imageUrl);
@@ -41,6 +42,16 @@ public class FileUtil {
 
         BufferedImage bufferedImage = ImageIO.read(url);
         ImageIO.write(bufferedImage, fileExtension, new File(pathname + filename));
+
+        return filename;
+    }
+
+    public String writeToDiskFromBuffer(MultipartFile multipartFile) throws IOException {
+        String filename = renameFile(multipartFile.getOriginalFilename());
+        String pathname = externalResources.substring("file:".length()) + "/products/";
+
+        java.nio.file.Files.createDirectories(Paths.get(pathname));
+        multipartFile.transferTo(new File(pathname + filename));
 
         return filename;
     }

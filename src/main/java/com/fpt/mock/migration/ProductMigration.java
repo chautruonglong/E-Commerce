@@ -28,13 +28,13 @@ record ProductMigration(FileUtil fileUtil, ProductRepository productRepository) 
 
         for(Map<?, ?> productJson : productJsons) {
             String imageUrl = (String) productJson.get("thumbnailImage");
-            String thumbnailImage = fileUtil.writeToDisk(imageUrl);
+            String thumbnailImage = fileUtil.writeToDiskFromInternet(imageUrl);
 
             List<?> imageUrls = (List<?>) productJson.get("otherImages");
             List<String> otherImages = new LinkedList<>();
 
             for(Object image : imageUrls) {
-                otherImages.add(fileUtil.writeToDisk((String) image));
+                otherImages.add(fileUtil.writeToDiskFromInternet((String) image));
             }
 
             products.add(Product.builder()
