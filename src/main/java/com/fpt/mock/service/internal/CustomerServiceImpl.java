@@ -1,10 +1,12 @@
 package com.fpt.mock.service.internal;
 
 import com.fpt.mock.dto.CustomerDto;
+import com.fpt.mock.dto.CustomerEditDto;
 import com.fpt.mock.dto.LoginDto;
 import com.fpt.mock.entity.Customer;
 import com.fpt.mock.repository.CustomerRepository;
 import com.fpt.mock.service.CustomerService;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +17,18 @@ class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public void login(LoginDto loginDto) {
-        String password = customerRepository.findPasswordByEmail(loginDto.getEmail());
+    public Customer login(LoginDto loginDto) {
+        Customer customer = customerRepository.findByEmail(loginDto.getEmail());
 
-        if(password == null) {
+        if(customer == null) {
             throw new RuntimeException("Email not in database");
         }
 
-        if(!password.equals(loginDto.getPassword())) {
+        if(!customer.getPassword().equals(loginDto.getPassword())) {
             throw new RuntimeException("Password do not match");
-
         }
+
+        return customer;
     }
 
     @Override
@@ -37,6 +40,19 @@ class CustomerServiceImpl implements CustomerService {
             .phone(customerDto.getPhone())
             .address(customerDto.getAddress())
             .build();
+
+        return customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer updateCustomer(CustomerEditDto customerEditDto, String id) {
+        Customer customer = customerRepository.findById(UUID.fromString(id))
+            .orElseThrow(() -> new RuntimeException("Customer not in database"));
+
+        customer.setPassword(customerEditDto.getPassword());
+        customer.setName(customerEditDto.getName());
+        customer.setPhone(customerEditDto.getPhone());
+        customer.setAddress(customerEditDto.getAddress());
 
         return customerRepository.save(customer);
     }

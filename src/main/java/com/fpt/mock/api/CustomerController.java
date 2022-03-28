@@ -1,6 +1,7 @@
 package com.fpt.mock.api;
 
 import com.fpt.mock.dto.CustomerDto;
+import com.fpt.mock.dto.CustomerEditDto;
 import com.fpt.mock.dto.LoginDto;
 import com.fpt.mock.entity.Customer;
 import com.fpt.mock.exception.GlobalRequestException;
@@ -11,8 +12,11 @@ import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,12 +26,12 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping("/api/v1/customers/login")
-    public ResponseEntity<String> login(HttpSession session, @Valid @RequestBody LoginDto loginDto) {
+    public ResponseEntity<Customer> login(HttpSession session, @Valid @RequestBody LoginDto loginDto) {
         try {
-            customerService.login(loginDto);
-            session.setAttribute("email", "demo");
+            Customer customer = customerService.login(loginDto);
+            session.setAttribute("customer", customer);
 
-            return ResponseEntity.ok("ok");
+            return ResponseEntity.ok(customer);
         }
         catch(Exception exception) {
             throw new GlobalRequestException(exception.getMessage(), HttpStatus.UNAUTHORIZED);
@@ -37,7 +41,7 @@ public class CustomerController {
     @PostMapping("/api/v1/customers/logout")
     public ResponseEntity<String> logout(HttpSession session) {
         try {
-            session.removeAttribute("email");
+            session.removeAttribute("customer");
 
             return ResponseEntity.ok("ok");
         }
@@ -53,6 +57,21 @@ public class CustomerController {
 
             return ResponseEntity.created(URI.create("/api/v1/customers/" + customer.getId()))
                 .body(customer);
+        }
+        catch(Exception exception) {
+            throw new GlobalRequestException(exception.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PutMapping("/api/v1/customers/{id}")
+    public ResponseEntity<Customer> putCustomer(@Valid @RequestBody CustomerEditDto customerEditDto,
+                                                @PathVariable String id,
+                                                HttpSession session) {
+        try {
+            Customer customer = customerService.updateCustomer(customerEditDto, id);
+            session.setAttribute("customer", customer);
+
+            return ResponseEntity.ok(customer);
         }
         catch(Exception exception) {
             throw new GlobalRequestException(exception.getMessage(), HttpStatus.UNAUTHORIZED);

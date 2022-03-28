@@ -9,56 +9,91 @@ $(document).ready(() => {
     const smTabs = $("#smTabCategory button");
 
     lgTabs.click(function() {
-        lgTabs.attr("class", lgTabDeactivate);
-        smTabs.attr("class", smTabDeactivate);
+        if(window.location.pathname.match(/^(\/home|\/index|\/)$/)) {
+            lgTabs.attr("class", lgTabDeactivate);
+            smTabs.attr("class", smTabDeactivate);
 
-        $(this).attr("class", lgTabActivate);
-        $(`button[name=${"sm" + $(this).attr("name").substring(2)}]`).attr("class", smTabActivate);
+            $(this).attr("class", lgTabActivate);
+            $(`button[name=${"sm" + $(this).attr("name").substring(2)}]`).attr("class", smTabActivate);
 
-        indexState = {
-            ...indexState,
-            page: 0,
-            category: $(this).text().toLowerCase(),
-            isSearching: false
-        };
+            indexState = {
+                ...indexState,
+                page: 0,
+                category: $(this).text().toLowerCase(),
+                isSearching: false
+            };
 
-        fetchMoreProducts(true);
+            fetchMoreProducts(true);
+        }
+        else {
+            window.location.href = `/home?page=0&limit=40&category=${$(this).text().toLowerCase()}`;
+        }
     });
 
     smTabs.click(function() {
-        lgTabs.attr("class", lgTabDeactivate);
-        smTabs.attr("class", smTabDeactivate);
+        if(window.location.pathname.match(/^(\/home|\/index|\/)$/)) {
+            lgTabs.attr("class", lgTabDeactivate);
+            smTabs.attr("class", smTabDeactivate);
 
-        $(this).attr("class", smTabActivate);
-        $(`button[name=${"lg" + $(this).attr("name").substring(2)}]`).attr("class", lgTabActivate);
+            $(this).attr("class", smTabActivate);
+            $(`button[name=${"lg" + $(this).attr("name").substring(2)}]`).attr("class", lgTabActivate);
 
-        indexState = {
-            ...indexState,
-            page: 0,
-            category: $(this).text().toLowerCase(),
-            isSearching: false
-        };
+            indexState = {
+                ...indexState,
+                page: 0,
+                category: $(this).text().toLowerCase(),
+                isSearching: false
+            };
 
-        fetchMoreProducts(true);
+            fetchMoreProducts(true);
+        }
+        else {
+            window.location.href = `/home?page=0&limit=40&category=${$(this).text().toLowerCase()}`;
+        }
     });
 
     $("#logoHeader").click(() => {
-        indexState = {
-            ...indexState,
-            page: 0,
-            category: null,
-            isSearching: false
-        };
+        if(window.location.pathname.match(/^(\/home|\/index|\/)$/)) {
+            indexState = {
+                ...indexState,
+                page: 0,
+                category: null,
+                isSearching: false
+            };
 
-        fetchMoreProducts(true);
+            fetchMoreProducts(true);
+        }
+        else {
+            window.location.href = "/home";
+        }
     });
 
     const searching = $("#searching");
     searching.keypress(e => {
-        const keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode === 13) {
+        if(e.keyCode === 13) {
             const q = searching.val();
             if(q) {
+                if(window.location.pathname.match(/^(\/home|\/index|\/)$/)) {
+                    indexState = {
+                        ...indexState,
+                        page: 0,
+                        category: q,
+                        isSearching: true
+                    };
+
+                    searchProducts(true);
+                }
+                else {
+                    window.location.href = `/home?page=0&limit=40&q=${q}`;
+                }
+            }
+        }
+    });
+
+    $("#searchingButton").click(() => {
+        const q = searching.val();
+        if(q) {
+            if(window.location.pathname.match(/^(\/home|\/index|\/)$/)) {
                 indexState = {
                     ...indexState,
                     page: 0,
@@ -68,20 +103,9 @@ $(document).ready(() => {
 
                 searchProducts(true);
             }
-        }
-    });
-
-    $("#searchingButton").click(() => {
-        const q = searching.val();
-        if(q) {
-            indexState = {
-                ...indexState,
-                page: 0,
-                category: q,
-                isSearching: true
-            };
-
-            searchProducts(true);
+            else {
+                window.location.href = `/home?page=0&limit=40&q=${q}`;
+            }
         }
     });
 
@@ -109,11 +133,11 @@ $(document).ready(() => {
     });
 
     $("#profileButton").click(() => {
-
+        window.location.href = "/profile";
     });
 
     $("#ordersButton").click(() => {
-
+        window.location.href = "/orders";
     });
 
     $("#logoutButton").click(() => {

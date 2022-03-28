@@ -23,7 +23,11 @@ const addEventsToProductDetail = (data) => {
 
     $("#orderProductButton").click(() => {
         if($("#userHeaderButton").is(":visible")) {
+            const order = {
+                productId: data.id,
+            }
 
+            createOrder(order);
         }
         else {
             $("#productDetail").remove();

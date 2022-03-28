@@ -24,7 +24,7 @@ const logout = () => {
         processData: false,
         url: "/api/v1/customers/logout",
         success: () => {
-            window.location.reload();
+            window.location.replace("/home");
         }
     });
 }
@@ -48,6 +48,22 @@ const signup = (customer) => {
         },
         error: data => {
             $("#signupMessage").text(data.responseJSON.message);
+        }
+    });
+}
+
+const updateCustomer = (customer, id) => {
+    $.ajax({
+        type: "PUT",
+        contentType: 'application/json',
+        processData: false,
+        data: JSON.stringify(customer),
+        url: `/api/v1/customers/${id}`,
+        success: () => {
+            $("#editMessage").html('<span class="text-emerald-600 text-xs italic">Update successfully</span>')
+        },
+        error: data => {
+            $("#editMessage").text(data.responseJSON.message);
         }
     });
 }

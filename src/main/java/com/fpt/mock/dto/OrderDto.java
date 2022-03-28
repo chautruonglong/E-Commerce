@@ -10,7 +10,4 @@ public class OrderDto {
     @NotNull
     private UUID productId;
 
-    @NotNull
-    private UUID customerId;
-
 }

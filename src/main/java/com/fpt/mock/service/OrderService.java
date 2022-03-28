@@ -1,10 +1,10 @@
 package com.fpt.mock.service;
 
-import com.fpt.mock.dto.OrderDto;
 import com.fpt.mock.entity.Order;
+import java.util.UUID;
 
 public interface OrderService {
 
-    Order createOrder(OrderDto orderDto);
+    Order createOrder(UUID productId, UUID customerId);
 
 }

@@ -1,10 +1,12 @@
 package com.fpt.mock.api;
 
 import com.fpt.mock.dto.OrderDto;
+import com.fpt.mock.entity.Customer;
 import com.fpt.mock.entity.Order;
 import com.fpt.mock.exception.GlobalRequestException;
 import com.fpt.mock.service.OrderService;
 import java.net.URI;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,10 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/api/v1/orders")
-    public ResponseEntity<Order> postOrder(@Valid @RequestBody OrderDto orderDto) {
+    public ResponseEntity<Order> postOrder(@Valid @RequestBody OrderDto orderDto, HttpSession session) {
         try {
-            Order order = orderService.createOrder(orderDto);
+            Customer customer = (Customer) session.getAttribute("customer");
+            Order order = orderService.createOrder(orderDto.getProductId(), customer.getId());
 
             return ResponseEntity.created(URI.create("/api/v1/orders/" + order.getId()))
                 .body(order);
