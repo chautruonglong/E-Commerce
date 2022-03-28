@@ -74,31 +74,7 @@ const fetchDetailProduct = (id) => {
         contentType: 'json',
         url: `/api/v1/products/${id}`,
         success: data => {
-            $.tmpl("productDetailTemplate", { product: data }).appendTo("body");
-
-            $("#productDetailCloseButton").click(() => {
-                $("#productDetail").remove();
-            });
-
-            $("#deleteProduct").click(() => {
-                deleteProduct(data.id);
-            });
-
-            $("#updateProduct").click(() => {
-                $("#productDetail").remove();
-                $("#productUpdate").show();
-
-                $("#productUpdate").attr("value", data.id);
-                $("#productFormUpdate input[name=name]").attr("value", data.name);
-                $("#productFormUpdate input[name=category]").attr("value", data.category);
-                $("#productFormUpdate input[name=price]").attr("value", Number(data.price.replace(/[^0-9.-]+/g, "")));
-                $("#productFormUpdate input[name=discount]").attr("value", Number(data.discount.replace(/[^0-9.-]+/g, "")));
-                $("#productFormUpdate textarea[name=description]").val(data.description);
-            });
-
-            $("#orderProduct").click(() => {
-                console.log("order");
-            });
+            addEventsToProductDetail(data);
         }
     });
 }

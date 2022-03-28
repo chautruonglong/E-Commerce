@@ -14,9 +14,16 @@
     <script th:src="@{https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js}"></script>
 
     <script th:src="@{/js/State.js}"></script>
+
     <script th:src="@{/js/service/ProductService.js}"></script>
+    <script th:src="@{/js/service/CustomerService.js}"></script>
+    <script th:src="@{/js/service/OrderService.js}"></script>
+
     <script th:src="@{/js/Index.js}"></script>
     <script th:src="@{/js/Header.js}"></script>
+    <script th:src="@{/js/Login.js}"></script>
+
+    <script th:src="@{/js/ProductDetail.js}"></script>
     <script th:src="@{/js/ProductCard.js}"></script>
     <script th:src="@{/js/ProductCreation.js}"></script>
     <script th:src="@{/js/ProductUpdate.js}"></script>
@@ -41,5 +48,6 @@
 
     <div th:replace="~{/components/ProductCreation :: productCreation__copy}"></div>
     <div th:replace="~{/components/ProductUpdate :: productUpdate__copy}"></div>
+    <div th:replace="~{/components/Login :: loginModal__copy}"></div>
   </body>
 </html>

@@ -20,11 +20,14 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "customers")
 public class Customer extends BaseEntity {
 
-    @Column(name = "email", columnDefinition = "text")
+    @Column(name = "email", unique = true, columnDefinition = "text")
     private String email;
 
     @Column(name = "password", columnDefinition = "text")
     private String password;
+
+    @Column(name = "name", columnDefinition = "text")
+    private String name;
 
     @Column(name = "address", columnDefinition = "text")
     private String address;

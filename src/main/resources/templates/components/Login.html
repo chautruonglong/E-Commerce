@@ -1,0 +1,116 @@
+<div id="loginModal" th:fragment="loginModal__copy" class="hidden fixed z-10 inset-0 overflow-y-auto" role="dialog" aria-modal="true">
+  <div class="flex min-h-screen text-center md:block md:px-2 lg:px-4" style="font-size: 0">
+    <div class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity md:block" aria-hidden="true"></div>
+    <span class="hidden md:inline-block md:align-middle md:h-screen" aria-hidden="true">&#8203;</span>
+
+    <div class="flex text-base text-left transform transition w-full md:inline-block md:max-w-2xl md:px-4 md:my-8 md:align-middle lg:max-w-4xl">
+      <div class="flex flex-col justify-start w-full items-center bg-white px-4 pt-14 pb-8 overflow-hidden shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+
+        <div class="flex items-center justify-end w-full mb-3">
+          <button id="loginModalCloseButton" type="button" class="text-gray-400 hover:text-gray-500">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="min-h-full w-full flex items-center justify-center px-4">
+          <div class="flex items-center justify-center flex-col w-full space-y-8">
+            <div>
+              <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+              <h2 id="titleLoginForm" class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+              <p class="mt-2 text-center text-sm text-gray-600">
+                Or
+                <button id="signupTabButton" class="font-medium text-indigo-600 hover:text-indigo-500"> Sign up </button>
+                <button id="signinTabButton" class="hidden font-medium text-indigo-600 hover:text-indigo-500"> Sign in </button>
+              </p>
+            </div>
+
+            <form id="loginForm" class="mt-8 space-y-6 w-4/5">
+              <input type="hidden" name="remember" value="true">
+              <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                  <input name="email" type="email" autocomplete="email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                </div>
+                <div>
+                  <input name="password" type="password" autocomplete="current-password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+                </div>
+              </div>
+
+              <div class="flex items-center justify-start">
+                <div class="flex items-center">
+                  <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                  <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+                </div>
+              </div>
+
+              <div>
+                <p id="loginMessage" class="text-red-500 text-xs italic"></p>
+              </div>
+
+              <div>
+                <button id="loginButton" type="button" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                  Sign in
+                </button>
+              </div>
+            </form>
+
+            <form id="signupForm" class="w-full hidden">
+              <div class="w-full mb-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-first-email">
+                  Email
+                </label>
+                <input name="email" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-email" type="email" placeholder="email@gmail.com">
+              </div>
+
+              <div class="w-full mb-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-first-password">
+                  Password
+                </label>
+                <input name="password" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-password" type="password" placeholder="******">
+              </div>
+
+              <div class="w-full mb-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-first-nameUser">
+                  Name
+                </label>
+                <input name="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-nameUser" type="text" placeholder="Nguyen Van A">
+              </div>
+
+              <div class="w-full mb-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-first-phone">
+                  Phone
+                </label>
+                <input name="phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-phone" type="text" placeholder="0775516337">
+              </div>
+
+              <div class="w-full mb-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-first-address">
+                  Address
+                </label>
+                <input name="address" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-1 leading-tight focus:outline-none focus:bg-white" id="grid-first-address" type="text" placeholder="400 Nguyen Hoang"/>
+              </div>
+
+              <div>
+                <p id="signupMessage" class="text-red-500 text-xs italic"></p>
+              </div>
+
+              <div class="flex justify-end w-full mt-3">
+                <button id="signupSubmitButton" type="button" class="w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <ion-icon name="arrow-up-outline" class="text-xl"></ion-icon>
+                  <span class="ml-5">Sign up</span>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

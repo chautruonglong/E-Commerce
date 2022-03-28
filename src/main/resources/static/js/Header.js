@@ -103,4 +103,20 @@ $(document).ready(() => {
            mobileMenu.slideToggle("fast");
        }
     });
+
+    $("#loginHeaderButton").click(() => {
+        $("#loginModal").show();
+    });
+
+    $("#profileButton").click(() => {
+
+    });
+
+    $("#ordersButton").click(() => {
+
+    });
+
+    $("#logoutButton").click(() => {
+        logout();
+    });
 });
