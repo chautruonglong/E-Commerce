@@ -6,6 +6,7 @@ create table customers (
     updatedAt timestamp default now(),
     address text,
     email text,
+    name text,
     password text,
     phone text,
     primary key (id)
@@ -33,3 +34,6 @@ create table products (
     thumbnailImage text,
     primary key (id)
 );
+
+alter table customers
+   add constraint UK_rfbvkrffamfql7cjmen8v976v unique (email);
