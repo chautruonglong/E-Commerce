@@ -4,3 +4,10 @@ let indexState = {
     category: null,
     isSearching: false
 };
+
+let orderState = {
+    page: 0,
+    limit: 20,
+};
+
+let timeout;

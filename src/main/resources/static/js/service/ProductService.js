@@ -88,6 +88,17 @@ const deleteProduct = (id) => {
         success: data => {
             $(`div[name=productCard][value=${id}]`).remove();
             $("#productDetail").remove();
+
+            clearTimeout(timeout);
+            $("div[id$=Snackbar]").hide();
+            $("#deleteSnackbar").toggle("slide", {
+                direction: "right",
+                complete: () => {
+                    timeout = setTimeout(() => {
+                        $("#deleteSnackbar").hide();
+                    }, 3000);
+                }
+            }, 300);
         }
     });
 }
@@ -116,6 +127,17 @@ const postProduct = (data) => {
                     fetchDetailProduct(id);
                 });
             });
+
+            clearTimeout(timeout);
+            $("div[id$=Snackbar]").hide();
+            $("#successSnackbar").toggle("slide", {
+                direction: "right",
+                complete: () => {
+                    timeout = setTimeout(() => {
+                        $("#successSnackbar").hide();
+                    }, 3000);
+                }
+            }, 300);
         }
     });
 }
@@ -144,6 +166,17 @@ const updateProduct = (id, data) => {
                     fetchDetailProduct(id);
                 });
             });
+
+            clearTimeout(timeout);
+            $("div[id$=Snackbar]").hide();
+            $("#successSnackbar").toggle("slide", {
+                direction: "right",
+                complete: () => {
+                    timeout = setTimeout(() => {
+                        $("#successSnackbar").hide();
+                    }, 3000);
+                }
+            }, 300);
         }
     });
 }

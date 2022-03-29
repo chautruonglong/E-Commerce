@@ -14,6 +14,7 @@
     <script th:src="@{https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js}"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
 
+    <script th:src="@{/js/State.js}"></script>
 
     <script th:src="@{/js/service/CustomerService.js}"></script>
 
@@ -78,5 +79,8 @@
       </div>
     </div>
 
+    <div th:replace="~{/components/NewSnackbar :: newSnackbar__copy}"></div>
+    <div th:replace="~{/components/SuccessSnackbar :: successSnackbar__copy}"></div>
+    <div th:replace="~{/components/DeleteSnackbar :: deleteSnackbar__copy}"></div>
   </body>
 </html>

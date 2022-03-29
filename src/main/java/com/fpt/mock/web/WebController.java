@@ -1,8 +1,12 @@
 package com.fpt.mock.web;
 
 import com.fpt.mock.dto.IndexProductDto;
+import com.fpt.mock.dto.OrderProductDto;
+import com.fpt.mock.entity.Customer;
+import com.fpt.mock.service.OrderService;
 import com.fpt.mock.service.ProductService;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class WebController {
 
     private final ProductService productService;
+    private final OrderService orderService;
 
     @GetMapping(value = {"/home", "/index", "/"})
     public String index(Model model,
@@ -57,8 +62,15 @@ public class WebController {
     }
 
     @GetMapping("/orders")
-    public String orders(Model model) {
+    public String orders(Model model,
+                         HttpSession session,
+                         @RequestParam(defaultValue = "20") int limit,
+                         @RequestParam(defaultValue = "0") int page) {
         try {
+            Customer customer = (Customer) session.getAttribute("customer");
+            List<OrderProductDto> products = orderService.getOrderProductByCustomerId(customer.getId(), limit, page);
+            model.addAttribute("products", products);
+
             return "Orders";
         }
         catch(Exception exception) {

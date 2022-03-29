@@ -16,20 +16,34 @@
 
     <script th:src="@{/js/State.js}"></script>
 
-    <script th:src="@{/js/service/ProductService.js}"></script>
-    <script th:src="@{/js/service/CustomerService.js}"></script>
     <script th:src="@{/js/service/OrderService.js}"></script>
 
-    <script th:src="@{/js/Index.js}"></script>
     <script th:src="@{/js/Header.js}"></script>
-    <script th:src="@{/js/Login.js}"></script>
-
-    <script th:src="@{/js/ProductDetail.js}"></script>
-    <script th:src="@{/js/ProductCard.js}"></script>
-    <script th:src="@{/js/ProductCreation.js}"></script>
-    <script th:src="@{/js/ProductUpdate.js}"></script>
+    <script th:src="@{/js/Orders.js}"></script>
   </head>
   <body>
     <div th:replace="~{/components/Header :: header__copy}"></div>
+
+    <div class="bg-white">
+      <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="text-2xl font-extrabold tracking-tight text-gray-900 mb-16">Your Orders</h2>
+
+        <div class="mt-8 w-4/5 mx-auto">
+          <div class="flow-root">
+            <ul id="orderLists" role="list" class="-my-6 divide-y divide-gray-200">
+
+              <th:block th:each="product: ${products}">
+                <div th:replace="~{/components/OrderItem :: orderItem__copy(${product})}"></div>
+              </th:block>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:replace="~{/components/NewSnackbar :: newSnackbar__copy}"></div>
+    <div th:replace="~{/components/SuccessSnackbar :: successSnackbar__copy}"></div>
+    <div th:replace="~{/components/DeleteSnackbar :: deleteSnackbar__copy}"></div>
   </body>
 </html>
